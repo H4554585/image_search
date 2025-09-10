@@ -10,8 +10,8 @@ const Home = () => {
   let [currentSearch, setCurrentSearch] = useState("");
 
   const initialURL =
-    "https://image-search-60ni.onrender.com?page=1&per_page=15";
-  let searchURL = `https://image-search-60ni.onrender.com?query=${input}&page=1&per_page=15`;
+    "https://image-search-60ni.onrender.com/api/search?page=1&per_page=15";
+  let searchURL = `https://image-search-60ni.onrender.com/api/search?query=${input}&page=1&per_page=15`;
 
   const search = async (url) => {
     let result = await axios.get(url);
@@ -26,9 +26,9 @@ const Home = () => {
     setPage(nextPage);
 
     if (currentSearch === "") {
-      newURL = `https://image-search-60ni.onrender.com?page=${nextPage}&per_page=15`;
+      newURL = `https://image-search-60ni.onrender.com/api/search?page=${nextPage}&per_page=15`;
     } else {
-      newURL = `https://image-search-60ni.onrender.com?query=${currentSearch}&page=${nextPage}&per_page=15`;
+      newURL = `https://image-search-60ni.onrender.com/api/search?query=${currentSearch}&page=${nextPage}&per_page=15`;
     }
 
     let result = await axios.get(newURL);
