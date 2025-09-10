@@ -8,14 +8,12 @@ const Home = () => {
   let [data, setData] = useState(null);
   let [page, setPage] = useState(1);
   let [currentSearch, setCurrentSearch] = useState("");
-  const auth = "80kVqkLUCiN99LrJTdqp312Ja2Ul8nVtG1obCGn9kHbCts36SFxLu6sG";
-  const initialURL = "https://api.pexels.com/v1/curated?page=1&per_page=15";
-  let searchURL = `https://api.pexels.com/v1/search?query=${input}&page=1&per_page=15`;
+
+  const initialURL = "http://localhost:5000/api/search?page=1&per_page=15";
+  let searchURL = `http://localhost:5000/api/search?query=${input}&page=1&per_page=15`;
 
   const search = async (url) => {
-    let result = await axios.get(url, {
-      headers: { Authorization: auth },
-    });
+    let result = await axios.get(url);
     // console.log(result);
     setData(result.data.photos);
     setCurrentSearch(input);
@@ -23,18 +21,16 @@ const Home = () => {
 
   const morePicture = async () => {
     let newURL;
-    setPage(page + 1);
-    // 因為closure的關係，backtick內的page要設定成{page + 1}
+    const nextPage = page + 1;
+    setPage(nextPage);
+
     if (currentSearch === "") {
-      newURL = `https://api.pexels.com/v1/curated?page=${page + 1}&per_page=15`;
+      newURL = `http://localhost:5000/api/search?page=${nextPage}&per_page=15`;
     } else {
-      newURL = `https://api.pexels.com/v1/search?query=${currentSearch}&page=${
-        page + 1
-      }&per_page=15`;
+      newURL = `http://localhost:5000/api/search?query=${currentSearch}&page=${nextPage}&per_page=15`;
     }
-    let result = await axios.get(newURL, {
-      headers: { Authorization: auth },
-    });
+
+    let result = await axios.get(newURL);
     setData(data.concat(result.data.photos));
   };
 
