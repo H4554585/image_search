@@ -5,7 +5,7 @@ const cors = require("cors");
 const app = express();
 const PORT = 5000;
 
-const PEXELS_KEY = "80kVqkLUCiN99LrJTdqp312Ja2Ul8nVtG1obCGn9kHbCts36SFxLu6sG";
+const PEXELS_KEY = process.env.PEXELS_KEY;
 
 app.use(cors());
 
